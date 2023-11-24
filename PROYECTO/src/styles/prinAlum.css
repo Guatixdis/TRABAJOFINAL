@@ -1,0 +1,96 @@
+body, h1, p, ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  display: flex; /* Utiliza flexbox para alinear verticalmente */
+  flex-direction: column; /* Alinea los elementos en una columna vertical */
+}
+
+.cabeza {
+  background: rgb(255, 173, 77); /* Fondo en tono de naranja */
+  color: rgb(0, 0, 0); /* Color del texto en negro */
+  padding: 1%; /* Espaciado interno para los elementos dentro de la cabecera */
+  display: flex; /* Usa flexbox para alinear los elementos horizontalmente */
+  justify-content: space-between; /* Distribuye los elementos de manera uniforme */
+  align-items: center; /* Centra verticalmente los elementos */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para una apariencia elevada */
+}
+
+.cabeza h1 {
+  font-size: 30px; /* Tamaño de fuente del título */
+  margin: 0; /* Elimina el margen predeterminado */
+}
+
+.cabeza img {
+  margin: 0 0.25%; /* Margen horizontal entre las imágenes y otros elementos */
+}
+
+.cuerpo {
+  display: flex;
+  flex: 100%;
+}
+
+.opciones {
+  width: 15%; /* Ancho del sidebar */
+  background-color: rgb(255, 204, 102); /* Fondo en tono de naranja más claro */
+  color: rgb(36, 106, 142); /* Color del texto en azul */
+  padding: 1%; /* Espaciado interno en el sidebar */
+  display: flex;
+  flex-direction: column; /* Alinea los elementos en una columna vertical */
+  justify-content: space-between; /* Distribuye uniformemente los elementos */
+}
+
+.opciones ul {
+  list-style-type: none; /* Quita las viñetas de la lista */
+  padding: 0; /* Elimina el relleno predeterminado de la lista */
+}
+
+.opciones li {
+  margin-bottom: 30%; /* Aumenta la distancia vertical entre los elementos */
+  font-size: 18px;
+  padding: 0 0 0 20%; /* Añade relleno solo a la izquierda */
+}
+
+.opciones li a {
+  color: rgb(179, 89, 0); /* Cambia el color de texto a naranja más oscuro */
+  text-decoration: none; /* Quita el subrayado de los enlaces */
+}
+
+.opciones li a:hover {
+  text-decoration: underline; /* Agrega subrayado al pasar el mouse por encima (opcional) */
+}
+
+.prin {
+  padding: 1.5% 0 0 1.5%;
+  width: 85%; /* Ancho del contenido principal */
+}
+
+.prin h1 {
+  border-bottom: 2px solid #a0a0a0; /* Agrega una línea divisoria en la parte inferior */
+  text-align: left;
+  width: 96.5%;
+  padding-bottom: 1.5%;
+}
+
+.ultre,
+.proxven {
+  margin-top: 2%;
+  margin-bottom: 2%;
+  padding: 1%;
+  width: 95%;
+  border-radius: 10px;
+  border-color: black;
+}
+
+.ultre {
+  background: rgb(255, 230, 204); /* Fondo en tono de naranja claro */
+}
+
+.proxven {
+  background: rgb(255, 230, 204); /* Fondo en tono de naranja claro */
+}
+
+

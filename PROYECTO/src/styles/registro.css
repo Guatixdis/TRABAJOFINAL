@@ -1,0 +1,51 @@
+/* Estilos para el segundo formulario */
+.formulario2 {
+    position: absolute; /* Establece la posición del formulario como absoluta */
+    top: 50%; /* Coloca el formulario en la mitad superior vertical de la ventana */
+    left: 50%; /* Coloca el formulario en la mitad izquierda horizontal de la ventana */
+    transform: translate(-50%, -50%); /* Centra el formulario en la ventana */
+    width: 900px; /* Establece el ancho del formulario */
+    background: white; /* Establece el fondo del formulario en blanco */
+    border-radius: 10px; /* Agrega esquinas redondeadas al formulario */
+    border-color: black; /* Establece el color del borde del formulario */
+}
+
+/* Estilos para el título principal del segundo formulario */
+.formulario2 h1 {
+    text-align: center; /* Centra el texto del título horizontalmente */
+    padding: 0 0 20px 0; /* Agrega espaciado en la parte inferior del título */
+    border-bottom: 1px solid silver; /* Agrega una línea inferior al título */
+}
+
+/* Estilos para el segundo título del segundo formulario */
+.formulario2 h2 {
+    text-align: center; /* Centra el texto del segundo título horizontalmente */
+    padding: 0 20px; /* Agrega espaciado en los bordes izquierdo y derecho del segundo título */
+}
+
+/* Estilos para el formulario en sí del segundo formulario */
+.formulario2 form {
+    padding: 0 40px; /* Agrega relleno en los bordes izquierdo y derecho del formulario */
+    box-sizing: border-box; /* Incluye el relleno y el borde en el tamaño total del formulario */
+}
+
+/* Estilos para la sección "datopers" (información personal) */
+.datopers {
+    float: left; /* Hace que la sección flote a la izquierda para alinearla horizontalmente */
+    width: 40%; /* Establece el ancho de la sección */
+    margin: 5% 5%; /* Agrega margen en la parte superior e inferior, y en los lados izquierdo y derecho */
+}
+
+/* Estilos para la sección "datocuen" (información de cuenta) */
+.datocuen {
+    float: left; /* Hace que la sección flote a la izquierda para alinearla horizontalmente */
+    width: 40%; /* Establece el ancho de la sección */
+    margin: 5% 5%; /* Agrega margen en la parte superior e inferior, y en los lados izquierdo y derecho */
+}
+
+/* Estilos para que la sección "datocuen" esté junto a la sección "datopers" */
+.datopers > .datocuen {
+    float: left; /* Hace que la sección flote a la izquierda para que esté junto a "datopers" */
+}
+
+  
