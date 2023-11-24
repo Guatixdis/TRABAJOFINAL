@@ -10,7 +10,7 @@ export function DemoProvider(  { children} ) {
         <Context.Provider value={ [estado, setEstado] }>
             {children}
         </Context.Provider>
-    )
+    )   
 }
 
 export function useDemoProvider() {
