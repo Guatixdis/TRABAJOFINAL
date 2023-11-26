@@ -3,5 +3,10 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/busquedaAlum": "pages/busquedaAlum.js",
-  "/prinAlum": "pages/prinAlum.js"
+  "/prinAdmin": "pages/prinAdmin.js",
+  "/": "pages/index.js",
+  "/busquedaAlum/[id]": "pages/busquedaAlum/[id].js",
+  "/api/leerListaReservasAPI": "pages/api/leerListaReservasAPI.js",
+  "/api/editarRecursosAPI": "pages/api/editarRecursosAPI.js",
+  "/busquedaAdmin": "pages/busquedaAdmin.js"
 }

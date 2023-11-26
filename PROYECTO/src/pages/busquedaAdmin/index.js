@@ -12,7 +12,7 @@ const BusquedaUsuario = () => {
     const [searchTitle, setSearchTitle] = useState(query.title === 'true');
   
     const handleSearch = () => {
-      router.push(`/busquedaUsuario/${encodeURIComponent(searchTerm)}`);
+      router.push(`/busquedaAlum/${encodeURIComponent(searchTerm)}`);
     };
   
     useEffect(() => {
@@ -60,4 +60,3 @@ const BusquedaUsuario = () => {
     };
     
     export default BusquedaUsuario;
-

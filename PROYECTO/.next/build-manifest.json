@@ -12,6 +12,11 @@
   ],
   "rootMainFiles": [],
   "pages": {
+    "/": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/index.js"
+    ],
     "/_app": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
@@ -22,15 +27,20 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/busquedaAlum": [
+    "/busquedaAdmin": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/busquedaAlum.js"
+      "static/chunks/pages/busquedaAdmin.js"
     ],
-    "/prinAlum": [
+    "/busquedaAlum/[id]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/prinAlum.js"
+      "static/chunks/pages/busquedaAlum/[id].js"
+    ],
+    "/prinAdmin": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/prinAdmin.js"
     ]
   },
   "ampFirstPages": []
