@@ -1,40 +1,29 @@
-import fsPromises from 'fs/promises';
+import axios from 'axios';
 
-const JSON_FILE_PATH = './src/pages/json/usuarios.json';
+// Variable global para almacenar los datos
+let existingData = [];
 
-export default async function registroAPIFile(req, res) {
+const API_URL = 'http://localhost:3080/api/listar';
+
+export default async function registroAPI(req, res) {
     if (req.method !== 'POST') {
         res.status(405).send({ "error": "método no soportado... solo POST" });
     } else if (req.method === 'POST') {
-
-        const tmp = JSON.stringify(req.body).replace("'", '"');
-        const body = JSON.parse(tmp);
-
         try {
-            // Intenta leer el contenido actual del archivo JSON
-            let existingData = [];
-
-            try {
-                const jsonData = await fsPromises.readFile(JSON_FILE_PATH);
-                existingData = JSON.parse(jsonData);
-            } catch (error) {
-                // El archivo no existe o está vacío, por lo que no es un arreglo
-                // Continuará con un arreglo vacío
-            }
+            // Realizar la solicitud a la API para obtener los datos
+            const apiResponse = await axios.get(API_URL);
+            existingData = apiResponse.data;
 
             // Asegurarse de que existingData sea un arreglo
             if (!Array.isArray(existingData)) {
-                existingData = [];
+                throw new Error('La respuesta de la API no es un arreglo válido.');
             }
 
-            // Agrega los nuevos datos al arreglo existente
+            // Obtén los datos del cuerpo de la solicitud y agrégales a existingData
+            const body = req.body;
             existingData.push(body);
 
-            // Escribe el archivo JSON con los datos actualizados
-            await fsPromises.writeFile(
-                JSON_FILE_PATH,
-                JSON.stringify(existingData, null, 2)
-            );
+            res.status(200).send({ "success": true });
         } catch (error) {
             console.error(error);
             res.status(500).send({ "error": "Error en el servidor" });

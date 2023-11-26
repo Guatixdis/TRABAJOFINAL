@@ -1,52 +1,64 @@
 import Link from 'next/link';
-import React, { useState, useEffect } from 'react';
-import datos from './json/usuarios.json';
-import {useDemoProvider} from './context/demo'
-import { useRouter } from 'next/router.js'
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useDemoProvider } from './context/demo';
+import { useRouter } from 'next/router.js';
 
 const Index = () => {
-    
     const [estado, setEstado] = useDemoProvider();
-    const router = useRouter()
-    // setEstado(usuarios.nombre)
+    const router = useRouter();
+    const [datos, setDatos] = useState([]);  // Estado local para almacenar los datos de la API
+
     function VerificarIngreso() {
         const mensajeElement = document.getElementById('mensaje');
         const correo = document.getElementById('corr').value;
         const contrasenia = document.getElementById('contra').value;
 
         if (correo.trim() !== '' && contrasenia.trim() !== '') {
-                if (Array.isArray(datos)) {
-                    datos.forEach(usuario => {
-                        if (correo === usuario.correo) {
-                            console.log('EXISTE EL USUARIO');
-                            if (contrasenia === usuario.contrasenia) {
-                                console.log('LA CONTRASEÑA CONCUERDA')
-                                setEstado(usuario.nombres)
-                                if (usuario.tipo === "usuario") {
-                                    router.push('/prinAlum')
-                                } else {
-                                    router.push('/prinAdmin')
-                                }
+            // Realiza la solicitud a la API para obtener los datos
+            axios.get('http://localhost:3080/api/listar')
+                .then(response => {
+                    // Verifica que la respuesta sea un array
+                    if (Array.isArray(response.data)) {
+                        // Puedes establecer los datos en el estado local si es necesario
+                        setDatos(response.data);
 
-                            }else{
+                        // Realiza la verificación de ingreso con los datos obtenidos de la API
+                        const usuarioEncontrado = response.data.find(usuario => correo === usuario.correo);
+
+                        if (usuarioEncontrado) {
+                            console.log('EXISTE EL USUARIO');
+                            if (contrasenia === usuarioEncontrado.contrasenia) {
+                                console.log('LA CONTRASEÑA CONCUERDA');
+                                setEstado(usuarioEncontrado.nombres);
+                                if (usuarioEncontrado.tipo === "usuario") {
+                                    router.push('/prinAlum');
+                                } else {
+                                    router.push('/prinAdmin');
+                                }
+                            } else {
                                 mensajeElement.textContent = 'Contraseña incorrecta';
                                 mensajeElement.style.color = 'red';
                             }
-                            
-                        }else{
+                        } else {
                             mensajeElement.textContent = 'No existe un usuario con ese correo';
                             mensajeElement.style.color = 'red';
-
                         }
-                    });
-                } else {
-                    console.error('El archivo JSON no tiene un formato de array válido.');
-                }
+                    } else {
+                        console.error('La respuesta de la API no es un formato de array válido.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al obtener datos de la API:', error);
+                    mensajeElement.textContent = 'Error al obtener datos de la API';
+                    mensajeElement.style.color = 'red';
+                });
         } else {
             mensajeElement.textContent = 'No están todos los campos llenos';
             mensajeElement.style.color = 'red';
         }
     }
+
     return (
         <>
             <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
