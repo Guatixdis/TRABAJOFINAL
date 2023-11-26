@@ -2,8 +2,10 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/editarLibro/[id]": "pages/editarLibro/[id].js",
+  "/prinAlum": "pages/prinAlum.js",
   "/": "pages/index.js",
+  "/busquedaAlum": "pages/busquedaAlum.js",
+  "/busquedaAlum/[id]": "pages/busquedaAlum/[id].js",
   "/prinAdmin": "pages/prinAdmin.js",
-  "/bibliotecas": "pages/bibliotecas.js"
+  "/busquedaAdmin": "pages/busquedaAdmin.js"
 }

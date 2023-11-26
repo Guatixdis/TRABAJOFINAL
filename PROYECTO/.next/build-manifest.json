@@ -27,20 +27,30 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/bibliotecas": [
+    "/busquedaAdmin": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/bibliotecas.js"
+      "static/chunks/pages/busquedaAdmin.js"
     ],
-    "/editarLibro/[id]": [
+    "/busquedaAlum": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/editarLibro/[id].js"
+      "static/chunks/pages/busquedaAlum.js"
+    ],
+    "/busquedaAlum/[id]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/busquedaAlum/[id].js"
     ],
     "/prinAdmin": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/prinAdmin.js"
+    ],
+    "/prinAlum": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/prinAlum.js"
     ]
   },
   "ampFirstPages": []

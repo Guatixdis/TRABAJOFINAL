@@ -1,8 +1,6 @@
-// pages/busquedaUsuario/[id].js
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import recursosData from '../../pages/json/recursos.json'; // Asegúrate de que la ruta al archivo sea correcta
 
 const BusquedaUsuarioId = () => {
   const router = useRouter();
@@ -10,13 +8,28 @@ const BusquedaUsuarioId = () => {
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
-    // Filtrar la lista de recursos según el ID proporcionado en la URL
-    const results = recursosData.filter((recurso) => (
-      recurso.titulo.toLowerCase().includes(id.toLowerCase()) ||
-      recurso.autor.toLowerCase().includes(id.toLowerCase())
-    ));
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:3080/recurso/listar');
+        if (!response.ok) {
+          throw new Error('Error al obtener datos del servidor');
+        }
 
-    setSearchResults(results);
+        const recursosData = await response.json();
+
+        // Filtrar la lista de recursos según el ID proporcionado en la URL
+        const results = recursosData.filter((recurso) => (
+          recurso.titulo.toLowerCase().includes(id.toLowerCase()) ||
+          recurso.autor.toLowerCase().includes(id.toLowerCase())
+        ));
+
+        setSearchResults(results);
+      } catch (error) {
+        console.error('Error al obtener datos del servidor:', error);
+      }
+    };
+
+    fetchData();
   }, [id]);
 
   return (
