@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image'
 import Link from 'next/link';
 import {useDemoProvider} from './context/demo'
-
+import { useState, useEffect } from 'react';
 const Index = () => {
 
     const [estado, setEstado] = useDemoProvider();
@@ -19,9 +19,10 @@ const Index = () => {
                 <div className="cuerpo">
                     <div className="opciones">
                         <ul>
-                            <li><Link href="/prinAlum">Principal</Link></li>
-                            <li><Link href="/perfilAlum">Perfil</Link></li>
-                            <li><Link href="/prestamos">Préstamos</Link></li>
+                        <li><Link href="/prinAdmin">Principal</Link></li>
+                        <li><Link href="/perfilAdmin">Perfil</Link></li>
+                        <li><Link href="/bibliotecas">Bibliotecas</Link></li>
+                        <li><Link href="/busquedaAlum">Búsqueda</Link></li>
                         </ul>
                     </div>
                     <div className="prin">
