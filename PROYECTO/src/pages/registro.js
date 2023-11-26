@@ -34,7 +34,7 @@ const Form = () => {
   
         try {
             const peticion = await fetch(
-                '/api/registroAPIFile',
+                'http://localhost:3080/api/agregar',
                 {
                     method : 'POST',
                     body : params,

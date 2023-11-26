@@ -2,6 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
+<<<<<<< HEAD
   "/busquedaAlum": "pages/busquedaAlum.js",
   "/prinAdmin": "pages/prinAdmin.js",
   "/": "pages/index.js",
@@ -9,4 +10,8 @@
   "/api/leerListaReservasAPI": "pages/api/leerListaReservasAPI.js",
   "/api/editarRecursosAPI": "pages/api/editarRecursosAPI.js",
   "/busquedaAdmin": "pages/busquedaAdmin.js"
+=======
+  "/prinAlum": "pages/prinAlum.js",
+  "/": "pages/index.js"
+>>>>>>> origin/master
 }
