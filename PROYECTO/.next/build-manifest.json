@@ -27,10 +27,20 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/prinAlum": [
+    "/bibliotecas": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/prinAlum.js"
+      "static/chunks/pages/bibliotecas.js"
+    ],
+    "/editarLibro/[id]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/editarLibro/[id].js"
+    ],
+    "/prinAdmin": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/prinAdmin.js"
     ]
   },
   "ampFirstPages": []

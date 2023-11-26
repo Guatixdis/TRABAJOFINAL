@@ -2,6 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/prinAlum": "pages/prinAlum.js",
-  "/": "pages/index.js"
+  "/editarLibro/[id]": "pages/editarLibro/[id].js",
+  "/": "pages/index.js",
+  "/prinAdmin": "pages/prinAdmin.js",
+  "/bibliotecas": "pages/bibliotecas.js"
 }

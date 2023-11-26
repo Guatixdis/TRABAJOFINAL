@@ -1,9 +1,8 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from 'react';
 import { useDemoProvider } from './context/demo';
 import Image from 'next/image';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
-
 
 const DemoContext = createContext();
 
@@ -14,42 +13,36 @@ const InsertarNuevoLibro = () => {
         autor: '',
         isbn: '',
         serie: '',
-        img: ''
+        img: '',
     });
-
     function registrarEstado(e) {
         setState({ ...state, [e.target.name]: e.target.value });
     }
 
     const doGuardarJSONRecursos = async () => {
-        const jsonData = await fetch('/api/editarRecursosAPI');
-        const existingData = await jsonData.json();
-
         const nuevoLibro = {
-            id: generarNuevoId(existingData),
             titulo: state.titulo,
             autor: state.autor,
             isbn: state.isbn,
             serie: state.serie,
-            img: 'https://img.freepik.com/vector-gratis/meme-cuadrado-gato-vibrante-simple_742173-4493.jpg'
-        };
-
-        const params = JSON.stringify(nuevoLibro);
-
-        try {
-            const peticion = await fetch('/api/editarRecursosAPI', {
+            img: 'https://img.freepik.com/vector-gratis/meme-cuadrado-gato-vibrante-simple_742173-4493.jpg',
+            };
+        
+            try {
+            const peticion = await fetch('http://localhost:3080/recurso/agregar', {
                 method: 'POST',
-                body: params,
+                body: JSON.stringify(nuevoLibro),
                 headers: {
-                    'Content-Type': 'application/json'
-                }
+                'Content-Type': 'application/json',
+                },
             });
             const data = await peticion.json();
             console.log(data);
-        } catch (err) {
+            window.location.href = '/gestionRecurso';
+            } catch (err) {
             console.log(err);
-        }
-    }
+            }
+        };
     function verificarRegistroRecursos() {
         const { titulo, autor, isbn, serie, img } = state;
         const mensajeElement = document.getElementById('mensaje');
@@ -141,7 +134,7 @@ const InsertarNuevoLibro = () => {
                             <button className="botoncito" type="button" onClick={verificarRegistroRecursos}>Guardar</button>
                         </section>
                         <aside className="Imagen">
-                            <Image className="Libreria" src="/libreriaUwU.jpg" height={250} width={350} alt="Libreria"></Image>
+                            <Image className="Libreria" src="/libreriaUwU.jpg" height={250} width={300} alt="Libreria"></Image>
                         </aside>
                     </form>
                 </div>
