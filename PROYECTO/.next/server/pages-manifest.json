@@ -3,6 +3,7 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
 <<<<<<< HEAD
+<<<<<<< HEAD
   "/busquedaAlum": "pages/busquedaAlum.js",
   "/prinAdmin": "pages/prinAdmin.js",
   "/": "pages/index.js",
@@ -14,4 +15,7 @@
   "/prinAlum": "pages/prinAlum.js",
   "/": "pages/index.js"
 >>>>>>> origin/master
+=======
+  "/prinAdmin": "pages/prinAdmin.js"
+>>>>>>> master
 }
