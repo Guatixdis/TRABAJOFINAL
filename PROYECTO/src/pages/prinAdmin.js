@@ -134,7 +134,7 @@ const Index = () => {
                 <li><Link href="/prinAdmin">Principal</Link></li>
                 <li><Link href="/perfilAdmin">Perfil</Link></li>
                 <li><Link href="/bibliotecas">Bibliotecas</Link></li>
-                <li><Link href="/buscar">Búsqueda</Link></li>
+                <li><Link href="/busquedaAdmin">Búsqueda</Link></li>
             </ul>
             </div>
             <div className="prin">

@@ -22,6 +22,7 @@ const Index = () => {
                             <li><Link href="/prinAlum">Principal</Link></li>
                             <li><Link href="/perfilAlum">Perfil</Link></li>
                             <li><Link href="/prestamos">Préstamos</Link></li>
+                            <li><Link href="/busquedaAlum">Búsqueda</Link></li>
                         </ul>
                     </div>
                     <div className="prin">
