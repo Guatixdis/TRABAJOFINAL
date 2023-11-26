@@ -13,12 +13,20 @@ const ListarRecursos = () => {
   useEffect(() => {
     const obtenerDatos = async () => {
       try {
-        const response = await fetch('/api/editarRecursosAPI');
-        if (response.ok) {
-          const data = await response.json();
-          setRecursos(data);
-        } else {
-          throw new Error('Error al obtener los recursos');
+        if (recursos.length === 0) {
+          const requestRecursos = {
+            method: 'GET',
+            headers: {
+            'Content-Type': 'application/json'
+            }
+        };
+          const response = await fetch('http://localhost:3080/recurso/listar', requestRecursos);
+          if (response.ok) {
+            const data = await response.json();
+            setRecursos(data);
+          } else {
+            throw new Error('Error al obtener los recursos');
+          }
         }
       } catch (error) {
         console.error('Error al obtener los recursos:', error);
@@ -26,7 +34,7 @@ const ListarRecursos = () => {
     };
 
     obtenerDatos();
-  }, []);
+  }, [recursos]);
 
   // Cálculo para la paginación
   const indexOfLastResource = currentPage * resourcesPerPage;

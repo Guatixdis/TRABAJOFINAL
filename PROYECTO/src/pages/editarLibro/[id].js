@@ -1,6 +1,5 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -12,63 +11,54 @@ const EditarLibro = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [reservaInfo, setReservaInfo] = useState(null);
 
-    //lee los libros
-    useEffect(() => {
-      const fetchLibro = async () => {
-        try {
-          const url = `/api/editarRecursosAPI?id=${id}`;
-          const response = await fetch(url);
-          if (response.ok) {
-            const data = await response.json();
-            setEditedLibro(data);
-            setIsLoading(false);
+  useEffect(() => {
+    const obtenerRecursos = async () => {
+      try {
+        const responseLibro = await fetch(`http://localhost:3080/recurso/${id}`);
+        if (responseLibro.ok) {
+          const dataLibro = await responseLibro.json();
+          setEditedLibro(dataLibro);
+
+          const responseReservas = await fetch('http://localhost:3080/reserva/listar');
+          if (responseReservas.ok) {
+            const dataReservas = await responseReservas.json();
+            const reservaEncontrada = dataReservas.find(reserva => reserva.libro === dataLibro.titulo);
+            setReservaInfo(reservaEncontrada);
           } else {
-            console.error('Error al obtener el libro:', response.statusText);
-            setIsLoading(false);
+            console.error('Error al obtener la lista de reservas:', responseReservas.statusText);
           }
-        } catch (error) {
-          console.error('Error al obtener el libro:', error);
+
           setIsLoading(false);
+        } else {
+          setIsLoading(false);
+          console.error('Error al obtener el libro por ID:', responseLibro.statusText);
         }
-      };
-  
-      if (id) {
-        fetchLibro();
+      } catch (error) {
+        setIsLoading(false);
+        console.error('Error al obtener el libro o la lista de reservas:', error);
       }
-    }, [id]);
-    //lee las reservas
-    useEffect(() => {
-      if (editedLibro && editedLibro[id] && editedLibro[id].titulo) {
-        // Obtener la información de reservas
-        fetch('/api/leerListaReservasAPI')
-          .then((response) => response.json())
-          .then((data) => {
-            const reserva = data.find((item) => item.libro === editedLibro[id].titulo);
-            setReservaInfo(reserva);
-          })
-          .catch((error) => {
-            console.error('Error al obtener la información de reservas:', error);
-          });
-      }
-    }, [editedLibro, id]);
-    //Revisa que este digitandose en el form
-    const handleFieldChange = (e) => {
-      const { name, value } = e.target;
-      setEditedLibro((prevEditedLibro) => ({
-        ...prevEditedLibro,
-        [id]: {
-          ...prevEditedLibro[id],
-          [name]: value,
-        },
-      }));
     };
-    //Guarda las ediciones de los recursos
+
+    if (id) {
+      obtenerRecursos();
+    }
+  }, [id]);
+  
+  const handleFieldChange = (e) => {
+    const { name, value } = e.target;
+    setEditedLibro((prevEditedLibro) => ({
+      ...prevEditedLibro,
+      [name]: value,
+    }));
+  };
+
   const handleSaveChanges = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch(`/api/editarRecursosAPI?id=${id}`, {
+      const url = `http://localhost:3080/recurso/actualizar/${id}`;
+      const response = await fetch(url, {
         method: 'PUT',
-        body: JSON.stringify(editedLibro[id]),
+        body: JSON.stringify(editedLibro),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -76,10 +66,10 @@ const EditarLibro = () => {
       if (response.ok) {
         console.log('Libro actualizado exitosamente');
         setShowAlert(true);
-        setTimeout(() => {setShowAlert(false);
-        }, 3000); // Duración en milisegundos antes de ocultar el aviso (en este caso, 3000ms = 3 segundos)
-      }
-      else {
+        setTimeout(() => {
+          setShowAlert(false);
+        }, 3000);
+      } else {
         console.error('Error al actualizar el libro:', response.statusText);
       }
     } catch (error) {
@@ -87,11 +77,14 @@ const EditarLibro = () => {
     }
   };
 
-
   const handleDeleteLibro = async () => {
     try {
-      const response = await fetch(`/api/editarRecursosAPI?id=${id}`, {
+      const url = `http://localhost:3080/recurso/eliminar/${id}`;
+      const response = await fetch(url, {
         method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
 
       if (response.status === 204) {
@@ -112,7 +105,7 @@ const EditarLibro = () => {
   if (!editedLibro) {
     return <div>No se pudo obtener el libro.</div>;
   }
-  
+
   return (
         <>
             <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
@@ -139,21 +132,25 @@ const EditarLibro = () => {
                             <h1 className="Titulo">Detalles del Libro</h1>
                               <ul className="requisitos">TÍTULO</ul>
                               <ul className="recursoName">
-                                <input
-                                  name="titulo"
-                                  type="text"
-                                  required placeholder="Titulo"
-                                  onChange={handleFieldChange}
-                                  value={editedLibro[id].titulo}/>
+                              <input
+                                name="titulo"
+                                type="text"
+                                required
+                                placeholder="Titulo"
+                                onChange={handleFieldChange}
+                                value={editedLibro.titulo || ''}
+                              />
                               </ul>
                               <ul className="requisitos">Autor, autores</ul>
                               <ul className="recursoName">
-                                <input
-                                  name="autor"
-                                  type="text"
-                                  required placeholder="Autor/es"
-                                  onChange={handleFieldChange}
-                                  value={editedLibro[id].autor}/>
+                              <input
+                                name="autor"
+                                type="text"
+                                required
+                                placeholder="Autor/es"
+                                onChange={handleFieldChange}
+                                value={editedLibro.autor || ''}
+                              />
                               </ul>
                               <ul className="requisitos">ISBN</ul>
                               <ul className="recursoName">
@@ -163,7 +160,8 @@ const EditarLibro = () => {
                                   required
                                   placeholder="ISBN"
                                   onChange={handleFieldChange}
-                                  value={editedLibro[id].isbn}/>
+                                  value={editedLibro.isbn ||''}
+                                  />
                               </ul>
                               <ul className="requisitos">Serie, Tipo</ul>
                               <ul className="recursoName">
@@ -172,13 +170,14 @@ const EditarLibro = () => {
                                   type="text"
                                   required placeholder="Serie/Tipo"
                                   onChange={handleFieldChange}
-                                  value={editedLibro[id].serie}/>
+                                  value={editedLibro.serie ||''}
+                                  />
                               </ul>
                             <button className="botoncito" type="submit">Guardar Cambios</button>
                             <button className="botoncito" onClick={handleDeleteLibro}>Eliminar Libro</button>
                           </section>
                           <aside className="Imagen">
-                            <Image className="Libreria" src={editedLibro[id].img} height={350} width={250} alt="Libreria" />
+                          <Image className="Libreria" src={editedLibro.img ||''} height={350} width={250} alt="Libreria" />
                           </aside>
                           <section className="reserva-info">
                             <h4>Estado de Reserva:</h4>
