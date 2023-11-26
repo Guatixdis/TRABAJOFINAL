@@ -2,5 +2,10 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
+<<<<<<< HEAD
   "/prinAdmin": "pages/prinAdmin.js"
+=======
+  "/prinAlum": "pages/prinAlum.js",
+  "/": "pages/index.js"
+>>>>>>> c3dd37ce5fd0b1f68b30ceed5f68575fce56d5be
 }
