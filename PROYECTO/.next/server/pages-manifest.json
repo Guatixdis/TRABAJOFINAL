@@ -2,28 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-<<<<<<< HEAD
-<<<<<<< HEAD
-  "/prinAdmin": "pages/prinAdmin.js"
-=======
   "/prinAlum": "pages/prinAlum.js",
   "/": "pages/index.js"
->>>>>>> c3dd37ce5fd0b1f68b30ceed5f68575fce56d5be
-=======
-<<<<<<< HEAD
-  "/busquedaAlum": "pages/busquedaAlum.js",
-  "/prinAdmin": "pages/prinAdmin.js",
-  "/": "pages/index.js",
-  "/busquedaAlum/[id]": "pages/busquedaAlum/[id].js",
-  "/api/leerListaReservasAPI": "pages/api/leerListaReservasAPI.js",
-  "/api/editarRecursosAPI": "pages/api/editarRecursosAPI.js",
-  "/busquedaAdmin": "pages/busquedaAdmin.js"
-=======
-  "/prinAlum": "pages/prinAlum.js",
-  "/": "pages/index.js"
->>>>>>> origin/master
-=======
-  "/prinAdmin": "pages/prinAdmin.js"
->>>>>>> master
->>>>>>> Son
 }
