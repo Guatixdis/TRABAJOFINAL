@@ -20,7 +20,7 @@ const ListarRecursos = () => {
             'Content-Type': 'application/json'
             }
         };
-          const response = await fetch('http://localhost:3080/recurso/listar', requestRecursos);
+          const response = await fetch('/api/recurso/listar', requestRecursos);
           if (response.ok) {
             const data = await response.json();
             setRecursos(data);
@@ -79,7 +79,7 @@ const ListarRecursos = () => {
               </div>
             ))}
           </div>
-          <div class="contenedorRegistro">
+          <div className="contenedorRegistro">
             <Link href="/gestionRecurso" className='linkRegistro'>Añadir Más Recursos</Link>
           </div>
           <div className="pagination">

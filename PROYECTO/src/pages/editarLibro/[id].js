@@ -9,17 +9,18 @@ const EditarLibro = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [editedLibro, setEditedLibro] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
+  const [showAlertDel, setshowAlertDel] = useState(false);
   const [reservaInfo, setReservaInfo] = useState(null);
 
   useEffect(() => {
     const obtenerRecursos = async () => {
       try {
-        const responseLibro = await fetch(`http://localhost:3080/recurso/${id}`);
+        const responseLibro = await fetch(`/api/recurso/${id}`);
         if (responseLibro.ok) {
           const dataLibro = await responseLibro.json();
           setEditedLibro(dataLibro);
 
-          const responseReservas = await fetch('http://localhost:3080/reserva/listar');
+          const responseReservas = await fetch('/api/reserva/listar');
           if (responseReservas.ok) {
             const dataReservas = await responseReservas.json();
             const reservaEncontrada = dataReservas.find(reserva => reserva.libro === dataLibro.titulo);
@@ -55,7 +56,7 @@ const EditarLibro = () => {
   const handleSaveChanges = async (event) => {
     event.preventDefault();
     try {
-      const url = `http://localhost:3080/recurso/actualizar/${id}`;
+      const url = `/api/recurso/actualizar/${id}`;
       const response = await fetch(url, {
         method: 'PUT',
         body: JSON.stringify(editedLibro),
@@ -65,9 +66,12 @@ const EditarLibro = () => {
       });
       if (response.ok) {
         console.log('Libro actualizado exitosamente');
-        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(true);
+        }, 500);
         setTimeout(() => {
           setShowAlert(false);
+          router.push('/bibliotecas');
         }, 3000);
       } else {
         console.error('Error al actualizar el libro:', response.statusText);
@@ -79,7 +83,7 @@ const EditarLibro = () => {
 
   const handleDeleteLibro = async () => {
     try {
-      const url = `http://localhost:3080/recurso/eliminar/${id}`;
+      const url = `/api/recurso/eliminar/${id}`;
       const response = await fetch(url, {
         method: 'DELETE',
         headers: {
@@ -87,9 +91,16 @@ const EditarLibro = () => {
         },
       });
 
-      if (response.status === 204) {
+      if (response.status === 200) {
         console.log('Libro eliminado exitosamente');
-        router.push('/bibliotecas');
+        setTimeout(() => {
+          setShowAlert(false);
+          setshowAlertDel(true);
+        }, 500);
+        setTimeout(() => {
+          router.push('/bibliotecas');
+          setshowAlertDel(false);
+        }, 3000);
       } else {
         console.error('Error al eliminar el libro:', response.statusText);
       }
@@ -192,23 +203,8 @@ const EditarLibro = () => {
                         </form>
                     </div>
                   </div>
-                  {showAlert && (
-        <div className="alert">
-          Libro guardado exitosamente
-        </div>
-      )}
-      <style jsx>{`
-        .alert {
-          position: fixed;
-          bottom: 20px;
-          left: 20px;
-          padding: 10px 20px;
-          background-color: #4caf50;
-          color: white;
-          border-radius: 4px;
-          z-index: 9999;
-        }
-      `}</style>
+                  {showAlert && (<div className="alerta">Libro modificado</div>)}
+                  {showAlertDel && (<div className="alertaElim">Libro eliminado</div>)}
         </>
   );
 };

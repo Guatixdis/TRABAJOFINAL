@@ -19,7 +19,7 @@ const Index = () => {
             'Content-Type': 'application/json'
             }
         };
-        const responseReservas = await fetch('http://localhost:3080/reserva/listar', requestReservas);
+        const responseReservas = await fetch('/api/reserva/listar', requestReservas);
         if (responseReservas.ok) {
             const reservas = await responseReservas.json();
             const ultimas = reservas.sort((a, b) => {
@@ -45,7 +45,7 @@ const Index = () => {
             'Content-Type': 'application/json'
             }
         };
-        const responseRecursos = await fetch('http://localhost:3080/recurso/listar', requestRecursos);
+        const responseRecursos = await fetch('/api/recurso/listar', requestRecursos);
         if (responseRecursos.ok) {
             const recursosData = await responseRecursos.json();
 
@@ -55,7 +55,7 @@ const Index = () => {
                 'Content-Type': 'application/json'
             }
             };
-            const responseReservas = await fetch('http://localhost:3080/reserva/listar', requestReservas);
+            const responseReservas = await fetch('/api/reserva/listar', requestReservas);
             if (responseReservas.ok) {
             const reservas = await responseReservas.json();
 
@@ -93,7 +93,7 @@ const Index = () => {
             'Content-Type': 'application/json'
             }
         };
-        const response = await fetch('http://localhost:3080/reserva/listar', request);
+        const response = await fetch('/api/reserva/listar', request);
         if (response.ok) {
             const recursosData = await response.json();
             setRecursos(recursosData);
@@ -134,7 +134,7 @@ const Index = () => {
                 <li><Link href="/prinAdmin">Principal</Link></li>
                 <li><Link href="/perfilAdmin">Perfil</Link></li>
                 <li><Link href="/bibliotecas">Bibliotecas</Link></li>
-                <li><Link href="/busquedaAdmin">Búsqueda</Link></li>
+                <li><Link href="/buscar">Búsqueda</Link></li>
             </ul>
             </div>
             <div className="prin">
