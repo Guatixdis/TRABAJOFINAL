@@ -1,13 +1,17 @@
 import { createContext, useContext, useState } from 'react';
 import { useDemoProvider } from './context/demo';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 
 const DemoContext = createContext();
 
+
 const InsertarNuevoLibro = () => {
+    const router = useRouter();
     const [estado, setEstado] = useDemoProvider();
+    const [showAlert, setShowAlert] = useState(false);
     const [state, setState] = useState({
         titulo: '',
         autor: '',
@@ -29,7 +33,7 @@ const InsertarNuevoLibro = () => {
             };
         
             try {
-            const peticion = await fetch('http://localhost:3080/recurso/agregar', {
+            const peticion = await fetch('/api/recurso/agregar', {
                 method: 'POST',
                 body: JSON.stringify(nuevoLibro),
                 headers: {
@@ -38,7 +42,6 @@ const InsertarNuevoLibro = () => {
             });
             const data = await peticion.json();
             console.log(data);
-            window.location.href = '/gestionRecurso';
             } catch (err) {
             console.log(err);
             }
@@ -49,7 +52,13 @@ const InsertarNuevoLibro = () => {
 
         if (titulo.trim() && autor.trim() && isbn.trim() && serie.trim() && img.trim()) {
             doGuardarJSONRecursos();
-            window.location.href = '/gestionRecurso';
+            setTimeout(() => {
+                setShowAlert(true);
+            }, 500);
+            setTimeout(() => {
+                setShowAlert(false);
+                router.push('/prinAdmin');
+            }, 3000);
         } else {
             mensajeElement.textContent = 'Por favor, rellena todos los campos.';
             mensajeElement.style.color = 'red';
@@ -139,6 +148,7 @@ const InsertarNuevoLibro = () => {
                     </form>
                 </div>
             </div>
+            {showAlert && (<div className="alerta">Libro añadido</div>)}
         </>
     );
 }
