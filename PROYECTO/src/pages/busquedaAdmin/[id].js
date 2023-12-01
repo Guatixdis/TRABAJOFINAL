@@ -10,7 +10,7 @@ const BusquedaUsuarioId = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3080/recurso/listar');
+        const response = await fetch('http://localhost:3080/api/recurso/listar');
         if (!response.ok) {
           throw new Error('Error al obtener datos del servidor');
         }
